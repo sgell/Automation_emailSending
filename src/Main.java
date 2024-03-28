@@ -14,10 +14,14 @@ public class Main {
     public static void main(String[] args) throws AWTException {
 
         System.setProperty("webdrivr.chrome.driver","/home/sgell/chromedriver-linux64/chromdriver");
+       String expectedTitle = "Mail.bg: Вход";
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://mail.bg/auth/lgn");
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        String actualTitle = driver.getTitle();
+
+        Assert.assertEquals(actualTitle,expectedTitle);
 
         // login (written test case)
         WebElement username = driver.findElement(By.id("imapuser"));
